@@ -5,7 +5,7 @@
  * Autor: Flávio Oliveira
  */
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth.json');
+const authConfig = process?.env?.SECRET || require('../config/auth.json');
 const User = require('../models/user.model');
 
 //--------------Método responsável por criar novo user--------------------

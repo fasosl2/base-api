@@ -16,7 +16,7 @@ const passportConfig = require('./config/passport');
 const app = express();
 
 // Importar o arquivo: 'database.js'
-const localDatabase = require('./config/database'); // ==> persistencia de maneira local: MongoDb
+const localDatabase = process?.env?.MONGODB_URI || require('./config/database'); // ==> persistencia de maneira local: MongoDb
 // const databaseCosmosDb = require('./config/databaseCosmosDb'); // ==> persistencia na nuvem: CosmosDb
 
 mongoose.Promise = global.Promise;
