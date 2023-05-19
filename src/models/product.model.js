@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const productsSchema = new Schema({
+const productSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -33,11 +33,10 @@ const productsSchema = new Schema({
     image: {
         type: String,
         required: false,
-        maxlength: 500
     }
 }, {
     timestamps: true,
     collection: 'products'
 });
 
-module.exports = mongoose.model('products', productsSchema);
+module.exports = mongoose.model('products', productSchema);

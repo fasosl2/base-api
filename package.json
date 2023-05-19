@@ -24,18 +24,18 @@
         "nodemon": "^2.0.2"
     },
     "dependencies": {
-        "body-parser": "^1.19.0",
         "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
         "eslint-friendly-formatter": "^4.0.1",
-        "eslint-plugin-html": "^6.0.0",
-        "express": "^4.17.1",
-        "express-jwt": "^5.3.3",
-        "express-promise-router": "^3.0.3",
-        "jsonwebtoken": "^8.5.1",
-        "mongodb": "^5.4.0",
-        "mongoose": "^5.8.11",
-        "morgan": "^1.9.1",
-        "passport": "^0.4.1",
+        "eslint-plugin-html": "^7.1.0",
+        "express": "^4.18.2",
+        "express-jwt": "^8.4.1",
+        "express-promise-router": "^4.1.1",
+        "jsonwebtoken": "^9.0.0",
+        "mongodb": "^5.5.0",
+        "mongoose": "^6.11.1",
+        "morgan": "^1.10.0",
+        "passport": "^0.6.0",
         "passport-local": "^1.0.0"
     }
 }

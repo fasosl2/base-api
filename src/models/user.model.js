@@ -7,7 +7,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth');
+const authConfig = process.env.SECRET;
 
 const Schema = mongoose.Schema;
 
@@ -47,7 +47,7 @@ userSchema.methods.generateJwt = function () {
         id: this._id,
         email: this.email,
         nome: this.nome
-    }, authConfig.secret, {
+    }, authConfig, {
         expiresIn: 43200 // expires in 5min
     });
 

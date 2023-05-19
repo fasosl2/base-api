@@ -7,12 +7,12 @@
 
 const Product = require('../models/product.model');
 
-//Método responsável por criar nova product
+//Método responsável por criar novo produto
 exports.create = async (req, res) => {
     try{
         const newProduct = new Product(req.body);
         const product = await newProduct.save();
-        res.status(201).send({ message: 'Product criado com sucesso!', product});
+        res.status(201).send({ message: 'Produto criado com sucesso!', product});
     } catch(e){
         res.status(500).send({ message: 'Falha ao criar Produto', error: req.body});
     }
