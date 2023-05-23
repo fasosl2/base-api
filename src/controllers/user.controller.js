@@ -91,7 +91,8 @@ exports.userLogin = async (req, res) => {
 // --------------Método responsável por validar o usuário--------------------
 exports.userAuth = (req, res, next) => {
 
-  if(!['/api/logout', '/api/users/login/'].find(ele => req.path.includes(ele))){
+  if(!['/api/logout', '/api/users/login/'].find(ele => req.path.includes(ele))
+  && !(req.path.includes('/api/products') && req.method === 'GET')){
     const token = req.headers['x-access-token'];
     if (!token?.length) {
         return res.status(401).send({
