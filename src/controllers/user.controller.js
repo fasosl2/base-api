@@ -12,7 +12,7 @@ const User = require('../models/user.model');
 // --------------Método responsável por criar novo user--------------------
 exports.create = async (req, res) => {
   const novoUser = new User(req.body);
-  novoUser.setPassword(req.body.senha);
+  novoUser.setPassword(req.body.password);
   console.log(novoUser);
   const user = await novoUser.save();
   res.status(201).send({
@@ -36,7 +36,7 @@ exports.findById = async (req, res) => {
 // --------------Método responsável por atualizar user pelo Id--------------------
 exports.update = async (req, res) => {
   // Validar campos
-  if (!req.body.nomeUser || !req.body.cargo || !req.body.cpf) {
+  if (!req.body.name || !req.body.type || !req.body.cpf) {
     return res.status(400).send({
       message: 'Os campos não podem estar vazios!',
     });
@@ -64,7 +64,7 @@ exports.userLogin = async (req, res) => {
     email: req.params.email,
   });
   if (user) {
-    if (user.validPassword(req.params.senha)) {
+    if (user.validPassword(req.params.password)) {
       user.hash = undefined;
       user.salt = undefined;
       user.createdAt = undefined;
@@ -96,24 +96,26 @@ exports.userLogin = async (req, res) => {
 exports.userAuth = (req, res, next) => {
   const token = req.headers['x-access-token'];
 
-  if (!token) {
+  if (!token?.length) {
     return res.status(401).send({
       message: 'No token provided.',
+      auth: false
     });
   }
-
-  console.log(token);
-
-  jwt.verify(token, authConfig.secret, (err, decoded) => {
+  jwt.verify(token, authConfig, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        message: 'Falha ao Autenticar!',
+        message: 'Autentication failed',
+        auth: false
       });
     }
     // se tudo estiver ok, salva no request para uso posterior
     req.userId = decoded.id;
     //        next();
-    return res.status(200).send({ message: 'autenticado' });
+    return res.status(200).send({
+      message: 'Autentication Success',
+      auth: true
+    });
   });
 };
 

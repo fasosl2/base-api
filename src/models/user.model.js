@@ -7,29 +7,34 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+
 const authConfig = process.env.SECRET;
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
     },
-    nome: {
+  name: {
         type: String,
-        required: true
+        required: true,
     },
-    tipo: {
+    type: {
         type: String,
-        required: true
+        required: true,
+    },
+    image: {
+        type: String,
+        required: false,
     },
     hash: String,
-    salt: String
+    salt: String,
 }, {
     timestamps: true,
-    collection: 'users'
+    collection: 'users',
 });
 
 userSchema.methods.setPassword = function (password) {
@@ -42,13 +47,13 @@ userSchema.methods.validPassword = function (password) {
     return this.hash === hash;
 };
 
-userSchema.methods.generateJwt = function () {
+userSchema.methods.generateJwt = () => {
     return jwt.sign({
         id: this._id,
         email: this.email,
-        nome: this.nome
+        name: this.name,
     }, authConfig, {
-        expiresIn: 43200 // expires in 5min
+        expiresIn: 1800, // expires in 30min
     });
 
 };

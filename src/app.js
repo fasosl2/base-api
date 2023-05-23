@@ -54,7 +54,7 @@ app.use('/api/', clienteRoute);
 app.use('/api/', userRoute);
 app.use('/api/', productRoute);
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401);
         res.json({ message: err.name + ': ' + err.message });
