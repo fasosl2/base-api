@@ -5,6 +5,7 @@
  * Autor: Flávio Oliveira
  */
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const authConfig = process?.env?.SECRET;
 const User = require('../models/user.model');
@@ -79,11 +80,6 @@ exports.userLogin = async (req, res) => {
         token,
       });
 
-      res.json({
-        success: true,
-        message: 'Authentication successful!',
-        token,
-      });
     } else {
       res.status(401).send('{INVALID PASSWORD}');
     }
@@ -94,33 +90,33 @@ exports.userLogin = async (req, res) => {
 
 // --------------Método responsável por validar o usuário--------------------
 exports.userAuth = (req, res, next) => {
-  const token = req.headers['x-access-token'];
 
-  if (!token?.length) {
-    return res.status(401).send({
-      message: 'No token provided.',
-      auth: false
-    });
-  }
-  jwt.verify(token, authConfig, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({
-        message: 'Autentication failed',
-        auth: false
+  if(!['/api/logout', '/api/users/login/'].find(ele => req.path.includes(ele))){
+    const token = req.headers['x-access-token'];
+    if (!token?.length) {
+        return res.status(401).send({
+          message: 'No token provided.',
+          auth: false,
+        });
+      }
+      jwt.verify(token, authConfig, (err, decoded) => {
+        if (err) {
+          return res.status(401).send({
+            message: 'No Auth',
+            auth: false,
+          });
+        }
+        req.userId = decoded.id;
+        next();
       });
-    }
-    // se tudo estiver ok, salva no request para uso posterior
-    req.userId = decoded.id;
-    //        next();
-    return res.status(200).send({
-      message: 'Autentication Success',
-      auth: true
-    });
-  });
+  } else{
+      next();
+  }
 };
 
 exports.userLogout = (req, res) => {
   res.status(200).send({
+    message: 'No Auth',
     auth: false,
     token: null,
   });

@@ -32,7 +32,7 @@ router.put('/users/:id', userController.update);
 router.delete('/users/:id', userController.delete);
 
 // Rota responsável por fazer login: localhost:8000/users/login/:email/:senha
-router.get('/users/login/:email/:senha', userController.userLogin);
+router.get('/users/login/:email/:password', userController.userLogin);
 
 // Rota responsável por fazer login: localhost:8000/auth
 router.get('/auth', userController.userAuth);

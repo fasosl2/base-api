@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
+const userController = require('./controllers/user.controller');
 require('dotenv').config();
 // const passportConfig = require('./config/passport');
 
@@ -21,6 +22,7 @@ const localDatabase = process.env.MONGODB_URI;
 mongoose.Promise = global.Promise;
 
 // ==> Conexão com a Base de Dados:
+mongoose.set('strictQuery', true);
 mongoose
     .connect(localDatabase, {
         useNewUrlParser: true,
@@ -39,14 +41,14 @@ mongoose
 // ==> Rotas
 const funcionarioRoute = require('./routes/funcionario.routes');
 const clienteRoute = require('./routes/cliente.routes');
-const osRoute = require('./routes/os.routes');
+//const osRoute = require('./routes/os.routes');
 const userRoute = require('./routes/user.routes');
 const productRoute = require('./routes/product.routes');
-
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('dev'));
 app.use(cors());
+app.use(userController.userAuth)
 
 app.use(passport.initialize());
 app.use('/api/', funcionarioRoute);
