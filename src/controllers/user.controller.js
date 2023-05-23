@@ -102,7 +102,7 @@ exports.userAuth = (req, res, next) => {
       jwt.verify(token, authConfig, (err, decoded) => {
         if (err) {
           return res.status(401).send({
-            message: 'No Auth',
+            message: 'Autentication failed',
             auth: false,
           });
         }
@@ -116,7 +116,6 @@ exports.userAuth = (req, res, next) => {
 
 exports.userLogout = (req, res) => {
   res.status(200).send({
-    message: 'No Auth',
     auth: false,
     token: null,
   });
