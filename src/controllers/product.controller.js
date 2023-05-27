@@ -33,8 +33,8 @@ exports.findById = async (req, res) => {
 //--------------Método responsável por atualizar Product pelo Id--------------------
 exports.update = async (req, res) => {
    //Validar campos
-   if (!req.body.codProduct && !req.body.status && !req.body.clienteProduct &&
-    !req.body.baseOp && !req.body.tecnicoProduct && !req.body.dtEntrada) {
+   if (!req.body._id && !req.body.title && !req.body.description &&
+    !req.body.price && !req.body.stock && !req.body.image) {
     return res.status(400).send({
         message: 'Os campos não podem estar vazios!'
     });
