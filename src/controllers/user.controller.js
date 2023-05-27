@@ -37,7 +37,7 @@ exports.findById = async (req, res) => {
 // --------------Método responsável por atualizar user pelo Id--------------------
 exports.update = async (req, res) => {
   // Validar campos
-  if (!req.body.name || !req.body.type || !req.body.cpf) {
+  if (!req.body.name || !req.body.type) {
     return res.status(400).send({
       message: 'Os campos não podem estar vazios!',
     });
