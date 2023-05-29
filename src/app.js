@@ -44,6 +44,7 @@ const clienteRoute = require('./routes/cliente.routes');
 //const osRoute = require('./routes/os.routes');
 const userRoute = require('./routes/user.routes');
 const productRoute = require('./routes/product.routes');
+const itemRoute = require('./routes/item.routes');
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('dev'));
@@ -55,6 +56,7 @@ app.use('/api/', funcionarioRoute);
 app.use('/api/', clienteRoute);
 app.use('/api/', userRoute);
 app.use('/api/', productRoute);
+app.use('/api/', itemRoute);
 
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {

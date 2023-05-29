@@ -47,5 +47,5 @@ exports.update = async (req, res) => {
 //--------------Método responsável por excluir Product pelo Id--------------------
 exports.delete = async (req, res) => {
     const product = await Product.findByIdAndDelete(req.params.id);
-    res.status(200).send({message: 'Funcionário excluído com sucesso!', product});
+    res.status(200).send({message: 'Produto excluído com sucesso!', product});
 };
