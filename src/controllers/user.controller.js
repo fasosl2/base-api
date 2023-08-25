@@ -75,7 +75,7 @@ exports.userLogin = async (req, res) => {
       const token = user.generateJwt();
 
       res.status(200).send({
-        user,
+    user,
         auth: true,
         token,
       });

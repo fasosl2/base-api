@@ -19,7 +19,7 @@ const userSchema = new Schema({
         unique: true,
         required: true,
     },
-  name: {
+    name: {
         type: String,
         required: true,
     },
@@ -54,7 +54,7 @@ userSchema.methods.generateJwt = () => {
         email: this.email,
         name: this.name,
     }, authConfig, {
-        expiresIn: 1800, // expires in 30min
+        expiresIn: 172800, // expires in 2 days
     });
 
 };
