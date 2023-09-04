@@ -5,37 +5,46 @@
  * Autor: Flávio Oliveira
  */
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const purchaseSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
+const purchaseSchema = new Schema(
+    {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        address: {
+            type: String,
+            required: false,
+            maxlength: 999,
+        },
+        products: [{
+            id: {
+                type: [Schema.Types.ObjectId],
+                ref: "products",
+                required: true,
+            },
+            count: {
+                type: Number,
+                required: true,
+            },
+            date: {
+                type: Date,
+                required: true,
+            },
+        }],
+        totalValue: {
+            type: Number,
+            required: false,
+        },
     },
-    address: {
-        type: String,
-        required: true,
-        maxlength: 999
-    },
-    products: {
-        type: [Schema.Types.ObjectId],
-        ref: "products",
-        required: true,
-    },
-    productsCount: {
-        type: [Number],
-        required: true
-    },
-    totalValue: {
-        type: Number,
-        required: true
+    {
+        timestamps: true,
+        collection: "Purchase",
     }
-}, {
-    timestamps: true,
-    collection: 'Purchase'
-});
+);
 
-module.exports = mongoose.model('Purchase', purchaseSchema);
+module.exports = mongoose.model("Purchase", purchaseSchema);

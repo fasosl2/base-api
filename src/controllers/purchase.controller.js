@@ -20,9 +20,12 @@ exports.create = async (req, res) => {
 
 //--------------Método responsável por listar Purchase's--------------------
 exports.findAll = async (req, res) => {
+
     const purchases = await Purchase.find()
-    .populate({ path: 'products', select: ['title','price'] })
+    .populate({ path: 'products.id', model: 'products', select: ['title','price'] })
     .populate({ path: 'user', select: ['name','email'] });
+
+
     res.status(200).send(purchases);
 }
 
