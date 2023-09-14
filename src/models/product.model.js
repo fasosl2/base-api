@@ -37,7 +37,35 @@ const productSchema = new Schema({
     items: {
         type: String,
         required: false,
-    }
+    },
+    priceRecife: {
+        type: String,
+        required: false,
+    },
+    priceRMR: {
+        type: String,
+        required: false,
+    },
+    minPeople: {
+        type: String,
+        required: false,
+    },
+    maxPeople: {
+        type: String,
+        required: false,
+    },
+    startDate: {
+        type: Date,
+        required: false,
+    },
+    endDate: {
+        type: Date,
+        required: false,
+    },
+    blockedDays: {
+        type: [Boolean],
+        required: false,
+    },
 }, {
     timestamps: true,
     collection: 'products'

@@ -23,7 +23,7 @@ const purchaseSchema = new Schema(
         },
         products: [{
             id: {
-                type: [Schema.Types.ObjectId],
+                type: Schema.Types.ObjectId,
                 ref: "products",
                 required: true,
             },
