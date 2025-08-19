@@ -9,6 +9,4 @@ const app = require('./src/app');
 
 const port = process.env.PORT || 8000;
 
-app.listen(port);
-
-console.log(`Executando em http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => console.log(`Executando em http://0.0.0.0:${port}`));
