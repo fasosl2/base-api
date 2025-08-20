@@ -1,12 +1,16 @@
-/**
- * Arquivo: index.js
- * Descrição: Responsável pelo Back-End da Aplicação
- * Data: 03/02/2020
- * Autor: Flávio Oliveira
- */
-
+const fs = require('fs');
+const https = require('https');
 const app = require('./src/app');
 
 const port = process.env.PORT || 8000;
 
-app.listen(port, '0.0.0.0', () => console.log(`Executando em http://0.0.0.0:${port}`));
+// Carregar certificado autoassinado
+const options = {
+  key: fs.readFileSync('./certs/key.pem'),
+  cert: fs.readFileSync('./certs/cert.pem')
+};
+
+// Rodar servidor HTTPS
+https.createServer(options, app).listen(port, '0.0.0.0', () => {
+  console.log(`Executando em https://0.0.0.0:${port}`);
+});
