@@ -6,8 +6,8 @@ const port = process.env.PORT || 8000;
 
 // Carregar certificado autoassinado
 const options = {
-  key: fs.readFileSync('./certs/key.pem'),
-  cert: fs.readFileSync('./certs/cert.pem')
+  key: fs.readFileSync('./src/certs/key.pem'),
+  cert: fs.readFileSync('./src/certs/cert.pem')
 };
 
 // Rodar servidor HTTPS
